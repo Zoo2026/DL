@@ -1,0 +1,33 @@
+<div style="background: white; padding: 20px; border-radius: 10px;">
+    <h3>🔍 정보 신뢰성(CRAAP) 자가진단</h3>
+    <div id="quizArea"></div>
+    <button onclick="calcTrust()" style="width:100%; margin-top:15px; padding:10px;">신뢰도 점수 확인</button>
+    <div id="trustResult" style="margin-top:15px; font-weight:bold;"></div>
+</div>
+
+<script>
+const craap = [
+    "자료의 날짜가 최근인가요? (시의성)",
+    "자료의 출처가 공신력 있는 기관인가요? (권위)",
+    "작성자의 연락처나 프로필이 명시되어 있나요? (정확성)",
+    "정보가 치우치지 않고 객관적인가요? (목적성)"
+];
+
+let qHtml = "";
+craap.forEach((q, i) => {
+    qHtml += `<p>${i+1}. ${q}<br>
+    <input type="radio" name="tr${i}" value="5"> 매우 그렇다
+    <input type="radio" name="tr${i}" value="1"> 전혀 아니다</p>`;
+});
+document.getElementById('quizArea').innerHTML = qHtml;
+
+function calcTrust() {
+    let score = 0;
+    for(let i=0; i<4; i++) {
+        const checked = document.querySelector(`input[name="tr${i}"]:checked`);
+        if(checked) score += parseInt(checked.value);
+    }
+    let msg = score >= 15 ? "✅ 신뢰할 수 있는 정보입니다." : "⚠️ 출처를 다시 확인해보세요.";
+    document.getElementById('trustResult').innerText = `총점: ${score}/20점 - ${msg}`;
+}
+</script>

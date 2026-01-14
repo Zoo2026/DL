@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>참고문헌 생성기</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <section class="glass-panel" style="max-width: 600px; margin: 0 auto;">
+            <div class="content-header">
+                <div>
+                    <h1 style="font-size: 1.5rem;">📝 보고서 참고문헌 생성기</h1>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">APA 양식 자동 변환</p>
+                </div>
+                <a href="citation.html" class="back-btn" style="font-size: 0.8rem;"><i class="fas fa-arrow-left"></i>
+                    뒤로</a>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="text" id="author" placeholder="저자명 (예: 홍길동)"
+                    style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                <input type="text" id="year" placeholder="발행연도 (예: 2024)"
+                    style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                <input type="text" id="title" placeholder="도서명 (예: 미래를 바꾸는 독서)"
+                    style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                <input type="text" id="pub" placeholder="출판사 (예: 도서출판 미래)"
+                    style="padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+
+                <button onclick="makeCitation()"
+                    style="width: 100%; background: var(--primary-gradient); color: white; border: none; padding: 15px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; font-weight: bold; margin-top: 10px; transition: opacity 0.3s;">
+                    인용구 생성하기
+                </button>
+            </div>
+
+            <div id="citeResult"
+                style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.6); border-radius: 8px; border-left: 5px solid #764ba2; font-size: 1.05rem; display: none;">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function makeCitation() {
+            const a = document.getElementById('author').value;
+            const y = document.getElementById('year').value;
+            const t = document.getElementById('title').value;
+            const p = document.getElementById('pub').value;
+
+            if (!a || !y || !t || !p) { alert("모든 항목을 입력하세요!"); return; }
+
+            // APA 7판 형식: 저자 (연도). 도서명. 출판사.
+            const result = `${a} (${y}). <i>${t}</i>. ${p}.`;
+            const resultBox = document.getElementById('citeResult');
+            resultBox.innerHTML = "<b>복사해서 사용하세요:</b><br><br>" + result;
+            resultBox.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

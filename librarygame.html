@@ -1,0 +1,25 @@
+<div style="background:#eee; padding:20px; border-radius:10px; text-align:center;">
+    <h4>🏫 도서관 퀘스트: 자료 찾기</h4>
+    <p id="gameText">보고서를 쓰기 위해 도서관에 왔습니다. 어디서부터 시작할까요?</p>
+    <div id="gameBtns">
+        <button onclick="moveGame('search')">도서검색대에서 검색한다</button>
+        <button onclick="moveGame('shelf')">무작정 서가로 간다</button>
+    </div>
+</div>
+
+<script>
+function moveGame(path) {
+    const text = document.getElementById('gameText');
+    const btns = document.getElementById('gameBtns');
+    if(path === 'search') {
+        text.innerHTML = "✅ 올바른 선택입니다! 청구기호를 메모했습니다. 이제 어디로 갈까요?";
+        btns.innerHTML = `<button onclick="moveGame('success')">번호를 보고 서가로 이동</button>`;
+    } else if(path === 'shelf') {
+        text.innerHTML = "❌ 길을 잃었습니다. 도서관은 너무 넓군요... 처음으로 돌아갑니다.";
+        btns.innerHTML = `<button onclick="location.reload()">다시 시작</button>`;
+    } else if(path === 'success') {
+        text.innerHTML = "🏆 <b>성공!</b> 원하는 책을 찾았습니다. 이제 수행평가 만점은 당신의 것!";
+        btns.innerHTML = `<button onclick="location.reload()">한번 더 하기</button>`;
+    }
+}
+</script>
